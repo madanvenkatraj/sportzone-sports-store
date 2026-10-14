@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+  /* Nav is ~72px tall on mobile, ~80px on desktop */
+  scroll-padding-top: 88px;
+}
+
+body {
+  @apply font-sans antialiased text-slate-700 bg-white;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal-hidden {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .typing-dot {
+    animation: none !important;
+  }
+}
+
+.typing-dot {
+  animation: typingBounce 1s ease-in-out infinite;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes typingBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+@layer components {
+  .reveal-hidden {
+    @apply opacity-0 translate-y-6 transition-all duration-700 ease-out;
+  }
+  .reveal-visible {
+    @apply opacity-100 translate-y-0;
+  }
+}
+
+/* SPORTZONE additions */
+@keyframes sz-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.sz-marquee-track {
+  animation: sz-marquee 28s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sz-marquee-track {
+    animation: none !important;
+  }
+}
+
+.sz-clip-diagonal {
+  clip-path: polygon(0 0, 100% 6%, 100% 94%, 0 100%);
+}
+
+.sz-clip-slant-tl {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 12% 100%);
+}
